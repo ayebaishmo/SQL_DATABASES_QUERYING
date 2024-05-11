@@ -1,15 +1,15 @@
 import sqlite3 as sq
 
-# conn = sq.connect('demo_data.sqlite3')
-def connect_tosq_db(db_name = 'demo_data.sqlite3'):
+
+def connect_tosq_db(db_name='demo_data.sqlite3'):
     return sq.connect(db_name)
 
-# cursor = conn.cursor()
-# result = cursor.execute(q.CREATING_A_TABLE).fetchall()
+
 def execute_q(conn, query):
     curs = conn.cursor()
     curs.execute(query)
-    return  curs.fetchall()
+    return curs.fetchall()
+
 
 CREATING_A_TABLE = '''
 CREATE
@@ -22,7 +22,7 @@ TABLE
 '''
 
 INSERT_DATA = '''
-INSERT INTO 
+INSERT INTO
     demo
     (S, X, Y)
 VALUES
@@ -32,24 +32,24 @@ VALUES
     '''
 
 row_count = '''
-SELECT 
+SELECT
 COUNT(*)
-FROM 
+FROM
     demo
 '''
 
 xy_at_least_5 = '''
 SELECT
 COUNT(*)
-FROM 
+FROM
     demo
 WHERE "X" >=5 AND "Y" >= 5
 '''
 
 unique_y = '''
-SELECT 
+SELECT
 COUNT(DISTINCT y) AS unique_y_count
-FROM 
+FROM
     demo
 '''
 
@@ -63,7 +63,8 @@ print(result1)
 result2 = execute_q(conn, xy_at_least_5)
 conn.commit()
 print(result2)
-# unique_y: How many unique values of y are there (hint - COUNT() can accept a keyword DISTINCT)?
+'''unique_y: How many unique values of
+ y are there (hint - COUNT() can accept a keyword DISTINCT)?'''
 result3 = execute_q(conn, unique_y)
 conn.commit()
 print(result3)
